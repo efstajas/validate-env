@@ -36,21 +36,20 @@ This `.env.template` means you expect all the variables FOO, BAR, FOOBAR and FOO
 
 ### Usage
 
-To run the test, simply import the main function, and pass it your `.env.template` file path. It returns a Promise that will resolve to a `ValidatorResult`.
+To run the test, simply import the main function, and pass it your `.env.template` file path. It returns a Promise that will resolve to a `ValidatorResult`. 
 
 ```ts
 import validateEnv from '@efstajas/validate-env'
 
 validateEnv('./path/to/your/.env.template').then((r) => {
+  if (r.result === 'pass') {
+    //... your result is valid!
+  }
+
   if (r.result === 'fail') {
-    console.log('Failed variable', r.failedVar.name)
-    console.log('Reason', r.failedVar.reason)
     /*
-    Failed variable: VARIABLE_NAME
-    Reason: MISSING or WRONG_TYPE
+    Something is wrong in your .env
     */
-  } else if (r.result === 'pass') {
-    console.log('.env is valid 🎉')
   }
 }).catch((e) => {
   /*
@@ -75,11 +74,11 @@ validateEnv('./path/to/your/.env.template').then((r) => {
     } = failedVar
 
     if (failedVar.reason === 'MISSING') {
-      console.log(`Variable ${name} is missing in .env. Expected type: ${expectedType}`)
+      // The variable is missing.
     }
 
     if (failedVar.reason === 'WRONG_TYPE') {
-      console.log(`Variable ${name} isn't of expected type ${expectedType}.`)
+      // The variable is of a wrong type.
     }
   }
 })
@@ -106,6 +105,25 @@ const initializeApplication = () => {
 }
 
 validateEnv('./.env.template').then((r) => {
+  if (r.result === 'pass') {
+    initializeApplication()
+  }
+}).catch((e) => {
+  /*
+  Something went wrong while validating —
+  maybe we couldn't open the file, or the
+  template itself is invalid.
+  */
+  console.error(e)
+})
+```
+
+### Silent mode
+
+By default, `validate-env` prints warnings or a success message to the console automatically after validation. If you want to handle logs by yourself, you can disable this behavior by passing the `silent` option:
+
+```ts
+validateEnv('./.env.template', { silent: true }).then((r) => {
   if (r.result === 'fail') {
     const { failedVar } = r
 
@@ -126,12 +144,5 @@ validateEnv('./.env.template').then((r) => {
 
     initializeApplication()
   }
-}).catch((e) => {
-  /*
-  Something went wrong while validating —
-  maybe we couldn't open the file, or the
-  template itself is invalid.
-  */
-  console.error(e)
 })
 ```
