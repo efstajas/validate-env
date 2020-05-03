@@ -15,8 +15,6 @@ const isArrayish = (input: string) => {
     return false
   }
 
-  console.log(parsed)
-
   if (!Array.isArray(parsed.array)) {
     return false
   }
