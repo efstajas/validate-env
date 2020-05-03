@@ -2,8 +2,15 @@ import * as fs from 'fs'
 import * as readline from 'readline'
 import { ValidatorResult, VariableType, FailReason } from './validator.types'
 import validateVar from './methods/validateVar';
+import logger from './methods/logger';
 
-export default (location: string): Promise<ValidatorResult> => {
+export default (location: string, options: {
+  silent: boolean
+} = {
+  silent: false
+}): Promise<ValidatorResult> => {
+  let res: ValidatorResult;
+
   return new Promise((resolve, reject) => {
     const readInterface = readline.createInterface({
       input: fs.createReadStream(location).on('error', () => {
@@ -25,7 +32,7 @@ export default (location: string): Promise<ValidatorResult> => {
       const result = validateVar(expectedType as VariableType, actualValue)
 
       if (!result.pass) {
-        return resolve({
+        res = {
           result: 'fail',
           failedVar: result.failReason === FailReason.MISSING
             ? {
@@ -39,12 +46,18 @@ export default (location: string): Promise<ValidatorResult> => {
               expectedType: expectedType as VariableType,
               valid: false
             },
-        } as ValidatorResult)
+        } as ValidatorResult
+
+        readInterface.close()
       }
     }).on('close', () => {
-      return resolve({
+      if (!res) res = {
         result: 'pass'
-      })
+      } as ValidatorResult
+
+      if (!options.silent) logger(res)
+
+      return resolve(res)
     })
   })
 }
