@@ -43,13 +43,11 @@ import validateEnv from '@efstajas/validate-env'
 
 validateEnv('./path/to/your/.env.template').then((r) => {
   if (r.result === 'pass') {
-    //... your result is valid!
+    // Your .env is valid!
   }
 
   if (r.result === 'fail') {
-    /*
-    Something is wrong in your .env
-    */
+    // Something is wrong in your .env
   }
 }).catch((e) => {
   /*
@@ -73,12 +71,11 @@ validateEnv('./path/to/your/.env.template').then((r) => {
       expectedType
     } = failedVar
 
-    if (failedVar.reason === 'MISSING') {
-      // The variable is missing.
-    }
-
-    if (failedVar.reason === 'WRONG_TYPE') {
-      // The variable is of a wrong type.
+    switch (failedVar.reason) {
+      case 'MISSING':
+        // Variable is missing from .env
+      case 'WRONG_TYPE':
+        // Variable is present, but doesn't match expected type
     }
   }
 })
@@ -108,13 +105,6 @@ validateEnv('./.env.template').then((r) => {
   if (r.result === 'pass') {
     initializeApplication()
   }
-}).catch((e) => {
-  /*
-  Something went wrong while validating —
-  maybe we couldn't open the file, or the
-  template itself is invalid.
-  */
-  console.error(e)
 })
 ```
 
@@ -132,17 +122,20 @@ validateEnv('./.env.template', { silent: true }).then((r) => {
       expectedType
     } = failedVar
 
-    if (failedVar.reason === 'MISSING') {
-      console.log(`Variable ${name} is missing in .env. Expected type: ${expectedType}`)
+    switch (failedVar.reason) {
+      case 'MISSING':
+        console.log(`Variable ${name} is missing in .env. Expected type: ${expectedType}`)
+        break
+      case 'WRONG_TYPE':
+        console.log(`Variable ${name} isn't of expected type ${expectedType}.`)
+        break
     }
 
-    if (failedVar.reason === 'WRONG_TYPE') {
-      console.log(`Variable ${name} isn't of expected type ${expectedType}.`)
-    }
-  } else if (r.result === 'pass') {
-    console.log('.env is valid 🎉')
+    return
+  }
 
-    initializeApplication()
+  console.log('.env is valid 🎉')
+  initializeApplication()
   }
 })
 ```
