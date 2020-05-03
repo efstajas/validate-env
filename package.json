@@ -1,0 +1,18 @@
+{
+  "name": "@efstajas/validate-env",
+  "version": "0.0.1",
+  "description": "A simple utility that validates your process.env variables based on a .env.template file",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Jason Efstathiou",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.13.4",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "readline": "^1.3.0"
+  }
+}
