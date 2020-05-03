@@ -32,14 +32,14 @@ export type InvalidVariable = WrongTypeVariable | MissingVariable
 
 export interface WrongTypeVariable {
   valid: false
-  reason: FailReason
+  reason: FailReason.WRONG_TYPE
   name: string
   expectedType: VariableType
 }
 
 export interface MissingVariable {
   valid: false
-  reason: FailReason
+  reason: FailReason.MISSING
   name: string
   expectedType: VariableType
 }
