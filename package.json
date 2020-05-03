@@ -6,13 +6,15 @@
   "scripts": {
     "build": "tsc"
   },
+  "repositoy": "https://github.com/efstajas/validate-env.git",
   "author": "Jason Efstathiou",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^13.13.4",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "readline": "^1.3.0"
-  }
+  },
+  "keywords": [".env", "dotenv", "validate", ".env.template", "template"]
 }
