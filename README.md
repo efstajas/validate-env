@@ -86,7 +86,7 @@ validateEnv('./path/to/your/.env.template').then((r) => {
 
 ### Normal usage: Validating .env before starting your app
 
-Usually, you would want to validate your `.env` at the very beginning of your app, and if it fails, don't even initialize it. The best way to achieve this is to just wrap your initialization routine into a function, and then call it only if the `validateEnv` result indicates that your `.env` is valid. Probably, you're going to want to print some error messages into the console in case of a failure, so that other contributers know what's going on and your app doesn't just silently exit in case of an invalid `.env`. For an express application, it could look something like this:
+Usually, you would want to validate your `.env` at the very beginning of your app, and if it fails, don't even initialize it. The best way to achieve this is to just wrap your initialization routine into a function, and then call it only if the `validateEnv` result indicates that your `.env` is valid. For an express application, it could look something like this:
 
 ```ts
 // Use dotenv to load .env file into process.env
