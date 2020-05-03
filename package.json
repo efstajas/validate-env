@@ -1,6 +1,6 @@
 {
   "name": "@efstajas/validate-env",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A simple utility that validates your process.env variables based on a .env.template file",
   "main": "lib/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "@types/node": "^13.13.4",
     "typescript": "^3.8.3"
   },
-  "dependencies": {
+  "dependencies": { 
     "readline": "^1.3.0"
   },
   "keywords": [".env", "dotenv", "validate", ".env.template", "template"]
