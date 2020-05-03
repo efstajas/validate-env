@@ -1,6 +1,6 @@
 {
   "name": "@efstajas/validate-env",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple utility that validates your process.env variables based on a .env.template file",
   "main": "lib/index.js",
   "scripts": {
