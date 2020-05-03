@@ -1,5 +1,7 @@
 # 🚓 validate-env
 
+![Node.js 10.x and 12.x CI](https://github.com/efstajas/validate-env/workflows/Node.js%2010.x%20and%2012.x%20CI/badge.svg)
+
 A small utility for checking process.env based on a .env.template file in node.js. You can use it to make sure all your env variables are set before running your application, and optionally ensure they're of the right types too.
 
 ## ⬇️ Install
