@@ -35,7 +35,11 @@ const runTest = (testForType: VariableType, input: string) => {
   }
 }
 
-export default (expectedType: VariableType, actualValue: any): {
+export default (
+  expectedType: VariableType,
+  actualValue: any,
+  optional: boolean = false
+): {
   pass: true
 } | {
   pass: false
@@ -44,7 +48,9 @@ export default (expectedType: VariableType, actualValue: any): {
   pass: false
   failReason: FailReason.WRONG_TYPE
 } => {
-  if (!(actualValue && actualValue !== '')) {
+  const exists = (actualValue && actualValue !== '')
+
+  if (!optional && !exists) {
     return {
       pass: false,
       failReason: FailReason.MISSING
@@ -52,7 +58,7 @@ export default (expectedType: VariableType, actualValue: any): {
   }
 
   const typeCheck = runTest(expectedType, actualValue)
-  if (!typeCheck) {
+  if (exists && !typeCheck) {
     return {
       pass: false,
       failReason: FailReason.WRONG_TYPE

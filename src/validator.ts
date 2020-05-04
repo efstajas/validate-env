@@ -22,14 +22,15 @@ export default (location: string, options: {
       if (!line || line === '') return
 
       const name = line.split('=')[0]
-      const expectedType = line.split('=')[1].toUpperCase()
+      const expectedType = line.split('=')[1].toUpperCase().replace('?', '')
+      const optional = (line.substr(-1) === '?')
       const actualValue = process.env[name]
 
       if (!Object.values(VariableType).includes(expectedType as any)) {
         return reject(new Error(`Var ${name} has unknown expected type ${expectedType}. Valid types: string, number, array`))
       }
 
-      const result = validateVar(expectedType as VariableType, actualValue)
+      const result = validateVar(expectedType as VariableType, actualValue, optional)
 
       if (!result.pass) {
         res = {
