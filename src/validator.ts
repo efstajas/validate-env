@@ -19,13 +19,12 @@ export default (location: string, options: {
     })
 
     readInterface.on('line', (line = '') => {
-      const lineWithoutComments = line.replace(/\#(.*)/g, '')
+      const lineWithoutComments = line.replace(/\#(.*)/g, '').trim()
       if (lineWithoutComments === '') return
 
       const name = lineWithoutComments.split('=')[0].trim()
       const expectedType = lineWithoutComments.split('=')[1]
         .toUpperCase()
-        .trim()
       const actualValue = process.env[name]
 
       if (!Object.values(VariableType).includes(expectedType as any)) {
