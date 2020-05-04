@@ -18,12 +18,15 @@ export default (location: string, options: {
       }),
     })
 
-    readInterface.on('line', (line) => {
-      if (!line || line === '') return
+    readInterface.on('line', (line = '') => {
+      const lineWithoutComments = line.replace(/\#(.*)/g, '').trim()
+      if (lineWithoutComments === '') return
 
-      const name = line.split('=')[0]
-      const expectedType = line.split('=')[1].toUpperCase().replace('?', '')
-      const optional = (line.substr(-1) === '?')
+      const name = lineWithoutComments.split('=')[0].trim()
+      const expectedType = lineWithoutComments.split('=')[1]
+        .toUpperCase()
+        .replace('?', '')
+      const optional = (lineWithoutComments.substr(-1) === '?')
       const actualValue = process.env[name]
 
       if (!Object.values(VariableType).includes(expectedType as any)) {
