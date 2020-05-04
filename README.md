@@ -34,6 +34,8 @@ This `.env.template` means you expect all the variables FOO, BAR, FOOBAR and FOO
 - `boolean` means your variable must be either `'true'` or `'false'` 
 - `string` means your variable must be a valid string. In practice, *any value will pass this test*, because .env variables are always strings.
 
+💡*You can put comments in your env template by using `#`. Great for annotations or sharing default values!*
+
 ### Usage
 
 To run the test, simply import the main function, and pass it your `.env.template` file path. It returns a Promise that will resolve to a `ValidatorResult`. 
