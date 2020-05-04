@@ -23,10 +23,10 @@ export default (location: string, options: {
       if (lineWithoutComments === '') return
 
       const name = lineWithoutComments.split('=')[0].trim()
-      const expectedType = line.split('=')[1]
+      const expectedType = lineWithoutComments.split('=')[1]
         .toUpperCase()
         .replace('?', '')
-      const optional = (line.substr(-1) === '?')
+      const optional = (lineWithoutComments.substr(-1) === '?')
       const actualValue = process.env[name]
 
       if (!Object.values(VariableType).includes(expectedType as any)) {
