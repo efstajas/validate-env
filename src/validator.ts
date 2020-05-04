@@ -38,18 +38,12 @@ export default (location: string, options: {
       if (!result.pass) {
         res = {
           result: 'fail',
-          failedVar: result.failReason === FailReason.MISSING
-            ? {
-              reason: FailReason.MISSING,
-              name,
-              expectedType: expectedType as VariableType,
-              valid: false
-            } : {
-              reason: FailReason.WRONG_TYPE,
-              name,
-              expectedType: expectedType as VariableType,
-              valid: false
-            },
+          failedVar: {
+            reason: result.failReason,
+            name,
+            expectedType: expectedType as VariableType,
+            valid: false
+          }
         } as ValidatorResult
 
         readInterface.close()
