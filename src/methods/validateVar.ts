@@ -11,7 +11,6 @@ const isArrayish = (input: string) => {
     const testString = `{ "array": ${input} }`
     parsed = JSON.parse(testString)
   } catch (e) {
-    console.error(e)
     return false
   }
 
