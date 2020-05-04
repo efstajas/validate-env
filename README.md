@@ -24,15 +24,17 @@ First, create your `.env.template` file. This file contains all the .env variabl
 FOO=string
 BAR=number
 FOOBAR=array
-FOOBARFOO=boolean
+FOOBARFOO=boolean?
 ```
 
-This `.env.template` means you expect all the variables FOO, BAR, FOOBAR and FOOBARFOO to exist. As you can see, after the =, you can specify a type for that given variable:
+This `.env.template` means you expect all the variables FOO, BAR, and FOOBAR to exist. The `?` at the end of the FOOBARFOO variable's type means that it's an optional value — so, validation won't fail if it's not set, but if it is, it must be of type `boolean`. As you can see, after the =, you can specify a type for that given variable:
 
 - `number` means your variable must be numeric, meaning it can be something like `1` or `004` or even `6e+2`.
 - `array` means your variable must be a valid JSON array, like `["foo", 123]`. Please note it must be **valid JSON**, meaning strings are to be double-quoted.
 - `boolean` means your variable must be either `'true'` or `'false'` 
 - `string` means your variable must be a valid string. In practice, *any value will pass this test*, because .env variables are always strings.
+
+💡*You can put comments in your env template by using `#`. Great for annotations or sharing default values!*
 
 ### Usage
 
