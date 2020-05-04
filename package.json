@@ -1,12 +1,15 @@
 {
   "name": "@efstajas/validate-env",
   "version": "0.3.1",
-  "description": "A simple utility that validates your process.env variables based on a .env.template file",
+  "description": "🚓📋⚠️ A simple node.js utility that type-checks your process.env variables based on a .env.template file.",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc"
   },
-  "repositoy": "https://github.com/efstajas/validate-env.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/efstajas/validate-env.git"
+  },
   "author": "Jason Efstathiou",
   "license": "Apache-2.0",
   "devDependencies": {
@@ -16,5 +19,5 @@
   "dependencies": { 
     "readline": "^1.3.0"
   },
-  "keywords": [".env", "dotenv", "validate", ".env.template", "template"]
+  "keywords": [".env", "dotenv", "validate", ".env.template", "template", "typecheck", "typescript"]
 }
