@@ -1,6 +1,6 @@
 {
   "name": "@efstajas/validate-env",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "🚓📋⚠️ A simple node.js utility that type-checks your process.env variables based on a .env.template file.",
   "main": "lib/index.js",
   "scripts": {
